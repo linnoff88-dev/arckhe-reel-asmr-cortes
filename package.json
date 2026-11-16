@@ -1,0 +1,11 @@
+{
+  "name": "reel-asmr-cortes",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "som": "node ferramentas/som.mjs",
+    "check": "npx --yes hyperframes@0.9.37 check",
+    "render": "npx --yes hyperframes@0.9.37 render . -o renders/reel.mp4 --fps 30"
+  }
+}

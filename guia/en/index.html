@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>reel-asmr-cortes — ASMR reel factory</title>
+<meta name="description" content="3 satisfying reels per week made entirely with code on your computer: 3D fruit cut 10, 100, and 1,000 times, with sound, a series of objects, human approval, and Instagram posting.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/reel-asmr-cortes/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/reel-asmr-cortes/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/reel-asmr-cortes/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  .techhead{background:var(--bg2);border-top:3px solid var(--amb);padding:58px 0 8px}
+  .techhead h2{font-family:Sora;margin:.3em 0 0}
+  .techzone{background:var(--bg2)}
+  .quadros{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.quadros{grid-template-columns:1fr 1fr}}
+  .quadros figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+  .quadros img{width:100%;display:block}
+  .quadros figcaption{padding:8px 10px;font-size:.82rem;color:var(--mut)}
+  table.t{width:100%;border-collapse:collapse;font-size:.92rem}
+  table.t th,table.t td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
+  table.t th{font-family:Sora;color:var(--amb);font-weight:600}
+  .aviso{border-left:3px solid var(--amb);background:var(--card);padding:14px 16px;border-radius:0 12px 12px 0;color:var(--mut);margin-top:18px}
+  @media(max-width:600px){table.t,table.t tbody,table.t tr,table.t td{display:block;width:100%} table.t tr:first-child{display:none} table.t tr{padding:10px 0;border-bottom:1px solid var(--line)} table.t td{border:none;padding:2px 0} table.t td code{overflow-wrap:normal;word-break:break-word}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🍈</span> reel-asmr-cortes</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#video">Video</a>
+    <a class="sec" href="#reel">The reel</a>
+    <a class="sec" href="#semana">The week</a>
+    <a class="sec" href="#tecnico">Kit (technical)</a>
+    <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <a class="btn" href="https://github.com/inematds/reel-asmr-cortes" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">ASMR reel factory · made entirely with code</span>
+      <h1>You can have 3 satisfying reels per week without filming anything. The <span class="amb">ASMR reel factory</span> does it for you.</h1>
+      <p class="lead">Fruit-cutting videos hold people’s attention, but making them one by one gets tiring and slows the channel down. Here, the reel is made on your computer, for free, and only goes live after you approve it.</p>
+      <div class="cta">
+        <a class="btn" href="#reel">See what the reel looks like</a>
+        <a class="btn ghost" href="https://github.com/inematds/reel-asmr-cortes" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-en.jpg" alt="ASMR reels on autopilot: 3 satisfying reels per week, and only approved reels go live"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">In brief</span>
+  <p>“Satisfying” reels (ASMR) keep people watching, but producing them every week takes work. This kit makes a 36-second vertical reel where a 3D fruit is cut <strong>10, 100, and 1,000 times</strong>, with the sound of each cut and three jars at the end. Everything is drawn with code on your computer: no camera, no AI video, and no rendering costs. A fruit list becomes a series; an agent (Claude Code or Codex) makes 3 per week, <strong>you watch and approve them</strong>, and a script posts them to Instagram through the official API. To use it, you need Node.js, ffmpeg, and, if you want automatic posting, a professional Instagram account.</p>
+  <figure style="margin:22px 0 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="One fruit per reel: 10, 100, and 1,000 cuts, with jars at the end. 3D fruit, sound made with code, object list, human approval, and scheduled posting" loading="lazy" style="width:100%;display:block"></figure>
+</div></section>
+
+<section id="video"><div class="wrap">
+  <span class="chip">Video</span>
+  <h2>Understand it in 2 minutes</h2>
+  <p class="sub">From hook to end: the fruit list, the 10, 100 and 1,000 cuts made on your own computer, and the approval step that stays with you.</p>
+  <div style="aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--line)"><iframe src="https://www.youtube-nocookie.com/embed/ILIh5bg7cEs" title="Video: 3 ASMR reels a week without filming anything" style="width:100%;height:100%;border:0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <p class="mut" style="margin-top:12px"><a href="https://www.youtube.com/watch?v=ILIh5bg7cEs" target="_blank" rel="noopener">▶ Watch on YouTube</a> · <a href="https://youtube.com/shorts/6XtuaI2bPBo" target="_blank" rel="noopener">Short version (9:16)</a></p>
+</div></section>
+
+<section id="reel"><div class="wrap">
+  <span class="chip">The reel</span>
+  <h2>Why this format <span class="amb">holds attention</span></h2>
+  <p class="sub">A simple promise in the first frame and a number that keeps growing. People stay to see the 1,000 cuts and the jar at the end.</p>
+  <div class="quadros">
+    <figure><img src="../assets/quadro-capa.jpg" alt="Frame 0: whole passion fruit, title, and counter at zero" loading="lazy"><figcaption>0 s · the cover already shows what will happen</figcaption></figure>
+    <figure><img src="../assets/quadro-fatias.jpg" alt="Round of 10 cuts: passion fruit in slices with seeds showing" loading="lazy"><figcaption>3 s · 10 cuts: the slices open to reveal the inside</figcaption></figure>
+    <figure><img src="../assets/quadro-picar.jpg" alt="Round of 1,000 cuts: the pile chopped into small pieces" loading="lazy"><figcaption>24 s · the 1,000 round: it becomes a pile of small pieces</figcaption></figure>
+    <figure><img src="../assets/quadro-potes.jpg" alt="Ending: three jars with what is left from each round and the question" loading="lazy"><figcaption>34 s · the 3 jars and the question for viewers to answer</figcaption></figure>
+  </div>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h3>📈 Grows 10 times each round</h3><p>10, then 100, then 1,000 cuts, with each round faster. The large counter at the top keeps the promise visible throughout.</p></div>
+    <div class="card"><h3>🔊 Every cut has a sound</h3><p>The blade hitting the board, seeds popping, a piece falling into the jar. Everything lands on the exact frame of the cut, because sound and image read from the same list.</p></div>
+    <div class="card"><h3>🫙 Ends with a question</h3><p>“Which jar would you eat from?” Three results side by side invite comments without asking for a like or a link.</p></div>
+  </div>
+</div></section>
+
+<section id="semana"><div class="wrap">
+  <span class="chip">The week</span>
+  <h2>What your week looks like: <span class="amb">you just approve</span></h2>
+  <p class="sub">Two scheduled tasks handle the repetitive work. You still decide what goes live.</p>
+  <div class="flow">
+    <span>Monday 9 a.m.: the agent makes 3 reels</span><span class="arr">→</span>
+    <span>You watch and approve</span><span class="arr">→</span>
+    <span>Mon, Wed, and Fri 6 p.m.: posts 1 approved reel</span>
+  </div>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h3>🍊 One list becomes a series</h3><p>Each line in the list is a fruit (passion fruit, red onion, guava, tomato…). The framing, pace, and sound stay the same; only the object changes. That is what makes the channel feel like a series.</p></div>
+    <div class="card"><h3>✋ Nothing goes live without you</h3><p>The tasks never mark a reel as approved. You watch it, and only the reels you approve enter the posting queue.</p></div>
+    <div class="card"><h3>💸 Rendering cost: zero</h3><p>The video is drawn on your computer. You only pay for the agent plan you already use. Meta’s app and GitHub Pages are free.</p></div>
+  </div>
+  <p class="aviso">Prefer to post manually? You can stop at the approval step: the Instagram app schedules posts, and each reel’s caption is ready in a text file. Automatic posting is optional. <a href="#guia">How to use it ↓</a></p>
+</div></section>
+
+<div id="tecnico" class="techhead"><div class="wrap">
+  <span class="chip">Technical section</span>
+  <h2>The kit: <span class="amb">for anyone who wants to build the factory</span></h2>
+  <p class="sub">From here on, this is the technical part: installing, making the first reel, starting the series, and posting. You <strong>do not need</strong> this section to understand what came before.</p>
+</div></div>
+
+<div class="techzone">
+<section id="oque"><div class="wrap">
+  <span class="chip">What it is</span>
+  <h2>A HyperFrames + Three.js project with three parts</h2>
+  <p class="sub">HyperFrames turns an HTML page into a video, frame by frame. Three.js draws the 3D inside that page.</p>
+  <div class="grid g3">
+    <div class="card"><h3>🍈 The reel</h3><p><code>index.html</code> + <code>js/mundo.js</code>: the fruit is an ellipse divided into small cubes; a shader cuts each cube along the ellipse and colors its face based on the color at that point inside (rind, skin, flesh, seeds, rings).</p></div>
+    <div class="card"><h3>⏱️ One clock</h3><p><code>js/cortes.js</code> is the list of cuts (1,110 in total). The counter, blades, and sound all read from this list. The random seed changes for each reel, so each one cuts differently.</p></div>
+    <div class="card"><h3>📦 The factory</h3><p><code>objetos.csv</code> + <code>ferramentas/</code>: prepare the next reel, make it (sound, checks, photos, render), approve it, and post it. Two ready-to-use prompts in <code>agendar/</code> (in Portuguese).</p></div>
+  </div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">How it works</span>
+  <h2>From a line in the list to a post</h2>
+  <p class="sub">Each object passes through 5 status values in <code>objetos.csv</code>. Only one step requires you.</p>
+  <div class="flow">
+    <span>pendente</span><span class="arr">→</span>
+    <span>fazendo (novo-reel.mjs)</span><span class="arr">→</span>
+    <span>pronto (fazer-reel.sh)</span><span class="arr">→</span>
+    <span>aprovado (you)</span><span class="arr">→</span>
+    <span>postado (postar-instagram.mjs)</span>
+  </div>
+  <table class="t" style="margin-top:24px">
+    <tr><th>File</th><th>What it does</th></tr>
+    <tr><td><code>objeto.js</code></td><td>The only file that changes per reel: dimensions, color layers, rings, seeds, cream color, and caption.</td></tr>
+    <tr><td><code>ferramentas/objetos-prontos.js</code></td><td>9 objects already drawn inside: passion fruit, red onion, guava, tomato, orange, persimmon, melon, purple sweet potato, and coconut.</td></tr>
+    <tr><td><code>ferramentas/som.mjs</code> + <code>som/sintese.mjs</code></td><td>The sound of each cut, made with noise and filters at the exact time of each cut; final volume at −15 LUFS.</td></tr>
+    <tr><td><code>ferramentas/novo-reel.mjs</code></td><td>Gets the next pending object and creates <code>reels/&lt;data&gt;-&lt;objeto&gt;/</code>.</td></tr>
+    <tr><td><code>ferramentas/fazer-reel.sh</code></td><td>Sound → checks → 3 photos → render → <code>prontos/</code>. Never posts.</td></tr>
+    <tr><td><code>ferramentas/postar-instagram.mjs</code></td><td>Public link → reel container → wait for processing → publish. Includes a dry-run mode.</td></tr>
+  </table>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Requirements</span>
+  <h2>What needs to be installed</h2>
+  <p class="sub">You only need the first two to make reels. The third is for automatic posting.</p>
+  <div class="grid g3">
+    <div class="card"><h3>Node.js 22+ and git</h3><p>Runs HyperFrames and the scripts. HyperFrames is run through <code>npx</code>, with no installation needed.</p><pre><span class="k">node</span> --version</pre></div>
+    <div class="card"><h3>ffmpeg</h3><p>Adjusts the sound volume and assembles the MP4.</p><pre><span class="c"># Ubuntu</span>
+<span class="k">sudo apt install</span> ffmpeg
+<span class="c"># Mac</span>
+<span class="k">brew install</span> ffmpeg</pre></div>
+    <div class="card"><h3>For automatic posting</h3><p>A professional Instagram account (creator or business), a free Meta developer account, and a public GitHub repository to serve the video. See <code>SETUP.md</code> (in Portuguese) for the steps.</p></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">User guide · step by step</span>
+  <h2>From your first reel to an automated series</h2>
+  <p class="sub">Steps 1 to 4 make reels. Steps 5 and 6 set up automatic posting and scheduling.</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Download and make the example reel</h3>
+    <p>Generate the sound before rendering. The checks must finish without errors. The video is 36 seconds long, at 1080 × 1920.</p>
+<pre><span class="k">git clone</span> https://github.com/inematds/reel-asmr-cortes.git
+<span class="k">cd</span> reel-asmr-cortes
+<span class="k">node</span> ferramentas/som.mjs
+<span class="k">npx</span> --yes hyperframes@0.9.37 check
+<span class="k">npx</span> --yes hyperframes@0.9.37 render . -o renders/reel.mp4 --fps 30</pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Prepare the next item in the list</h3>
+    <p>Gets the first <code>pendente</code> object from <code>objetos.csv</code> and creates its folder. If the object is not one of the 9 ready-made objects, the command exits with code 2 and its folder’s <code>objeto.js</code> is marked <code>PREENCHER</code>: replace the measurements and colors as described in <code>RECEITA.md</code> (in Portuguese).</p>
+<pre><span class="k">node</span> ferramentas/novo-reel.mjs          <span class="c"># first time: reels/2026-11-15-maracuja (first in the list)</span>
+<span class="k">node</span> ferramentas/novo-reel.mjs goiaba   <span class="c"># or a specific object</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Make the reel</h3>
+    <p>Sound, checks, 3 still photos, and render. The result goes to <code>prontos/&lt;pasta&gt;/</code> with <code>reel.mp4</code>, the photos, and <code>legenda.txt</code>. If a step fails, the object returns to <code>pendente</code> and the reason is recorded in <code>FALHOU.md</code>.</p>
+<pre><span class="k">bash</span> ferramentas/fazer-reel.sh maracuja</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Watch and approve</h3>
+    <p>Only you can mark an object as <code>aprovado</code> (approved). With no arguments, the command lists all objects and their status.</p>
+<pre><span class="k">node</span> ferramentas/status.mjs                       <span class="c"># list</span>
+<span class="k">node</span> ferramentas/status.mjs maracuja aprovado</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Automatic posting (optional)</h3>
+    <p>Create the Meta app, generate a token, and set up the public link repository (<code>SETUP.md</code>, parts 2 and 3). Paste the token into <code>.env</code> yourself, never into a chat. The dry run shows what would be posted without sending anything.</p>
+<pre><span class="k">cp</span> .env.exemplo .env      <span class="c"># fill in IG_USER_ID, IG_ACCESS_TOKEN, LINKS_DIR and LINKS_URL</span>
+<span class="k">node</span> ferramentas/postar-instagram.mjs --ensaio
+<span class="k">node</span> ferramentas/postar-instagram.mjs           <span class="c"># posts 1 approved reel</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Schedule the two tasks</h3>
+    <p>The prompts are in <code>agendar/</code> (in Portuguese). Use cron and Claude Code in the terminal (replace the path), or paste the prompt into the Claude desktop app and ask it to schedule a task for the same time. Cron is the scheduler on Linux and Mac: <code>crontab -e</code> opens a text editor in the terminal; paste the two lines at the end, save and close (in nano: Ctrl+O, Enter, Ctrl+X). <code>--allowedTools</code> lets the task use the terminal on its own. On Windows, use WSL or the desktop app.</p>
+<pre><span class="k">crontab</span> -e
+<span class="c"># Monday 9 am: makes 3 reels (never posts)</span>
+0 9 * * 1      cd /caminho/reel-asmr-cortes &amp;&amp; claude -p "$(cat agendar/1-fazer-reels.md)" --allowedTools "Bash Read Edit Write" &gt;&gt; agenda.log 2&gt;&amp;1
+<span class="c"># Mon, Wed and Fri 6 pm: posts 1 approved reel</span>
+0 18 * * 1,3,5 cd /caminho/reel-asmr-cortes &amp;&amp; claude -p "$(cat agendar/2-postar-aprovado.md)" --allowedTools "Bash Read" &gt;&gt; agenda.log 2&gt;&amp;1</pre>
+  </div></div>
+</div></section>
+
+<section id="testado"><div class="wrap">
+  <span class="chip">What was tested</span>
+  <h2>What was checked here, and what you still need to test</h2>
+  <p class="sub">So you know what to expect before connecting your account.</p>
+  <table class="t">
+    <tr><th>Part</th><th>Status</th></tr>
+    <tr><td>Sound (<code>som.mjs</code>)</td><td>Ran: 1,110 cuts, 36 seconds, in about 1 second.</td></tr>
+    <tr><td>HyperFrames checks</td><td>No errors.</td></tr>
+    <tr><td>Still photos from the reel</td><td>Captured from the project itself: they are the images on this page.</td></tr>
+    <tr><td>Series (<code>novo-reel</code>, <code>status</code>, object without a design)</td><td>Tested on a copy of the project.</td></tr>
+    <tr><td>Posting (<code>postar-instagram.mjs</code>)</td><td>Dry-run mode only. The real post through Meta’s API <strong>was not done here</strong>; follow step 5 with 1 reel and check Instagram.</td></tr>
+    <tr><td>Full MP4 render</td><td>Not run in this version: follow step 1 on your machine.</td></tr>
+  </table>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <span class="chip">Roadmap</span>
+  <h2>Next steps</h2>
+  <p class="sub">What could come later if the series works.</p>
+  <div class="phase"><div class="tag">Now</div><div class="d"><strong>Fruit in 3 rounds + series + Instagram posting</strong><span>What is in this repository.</span></div></div>
+  <div class="phase"><div class="tag">Later</div><div class="d"><strong>More object formats</strong><span>Objects that are not ellipses (carrot, banana) and tools besides the blade.</span></div></div>
+  <div class="phase"><div class="tag">Later</div><div class="d"><strong>Other platforms</strong><span>TikTok and Shorts using the same <code>prontos/</code>.</span></div></div>
+</div></section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">HyperFrames</div><div class="pill">Three.js</div><div class="pill">Node.js</div><div class="pill">Instagram API</div>
+    <p style="margin-top:18px">reel-asmr-cortes · open source (MIT) ·
+      <a href="https://github.com/inematds/reel-asmr-cortes">inematds/reel-asmr-cortes</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='reel-asmr-cortes-theme'; // troque reel-asmr-cortes pelo nome do projeto
+    var b=document.body, t=document.getElementById('themeToggle');
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      localStorage.setItem(KEY, light?'light':'dark');
+    });
+  })();
+</script>
+</body>
+</html>

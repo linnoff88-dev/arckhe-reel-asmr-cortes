@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script type="importmap">{ "imports": { "three": "./lib/three.module.min.js" } }</script>
+<link rel="stylesheet" href="css/reel.css" />
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="36" data-width="1080" data-height="1920">
+  <canvas id="world" width="1080" height="1920"></canvas>
+
+  <!-- topo: quadro 0 já é a capa (objeto + promessa + contador) -->
+  <div id="topo">
+    <h1 id="titulo">Maracujá · 10 → 1.000 cortes</h1>
+    <div class="placar">
+      <div id="contador">0</div>
+      <div class="tag">CORTES</div>
+    </div>
+    <div class="chips">
+      <span id="chip0" class="chip agora">10</span>
+      <span id="chip1" class="chip depois">100</span>
+      <span id="chip2" class="chip depois">1.000</span>
+    </div>
+  </div>
+
+  <!-- rótulos dos potes (a posição vem da câmera, em js/mundo.js) -->
+  <div id="pote0" class="rot-pote">10</div>
+  <div id="pote1" class="rot-pote">100</div>
+  <div id="pote2" class="rot-pote">1.000</div>
+
+  <div id="chamada"><h2>Qual pote você comeria?</h2><p>feito só com código · grátis no <b>inema.club</b></p></div>
+
+  <audio id="som" class="clip" data-start="0" data-duration="36" data-track-index="10" data-volume="1" src="assets/cortes.wav"></audio>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.to({}, { duration: 36 }, 0);
+  window.__timelines = window.__timelines || {}; window.__timelines["main"] = tl;
+</script>
+<script type="module" src="js/mundo.js"></script>
+</body>
+</html>

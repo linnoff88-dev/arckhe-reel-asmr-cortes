@@ -1,0 +1,9 @@
+.env
+node_modules/
+.hyperframes/
+renders/
+review/
+fotos/
+reels/
+prontos/
+assets/*.wav

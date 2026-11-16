@@ -1,0 +1,30 @@
+/* Visual INEMA: preto #0c0c10, amarelo #FACC15 só no destaque, títulos Sora, números Montserrat. Fontes locais. */
+@font-face { font-family: Sora; src: url(../fontes/Sora.ttf); font-weight: 100 900; }
+@font-face { font-family: Montserrat; src: url(../fontes/Montserrat-Black.ttf); font-weight: 900; }
+@font-face { font-family: "JetBrains Mono"; src: url(../fontes/JetBrainsMono-Bold.ttf); font-weight: 700; }
+@font-face { font-family: Inter; src: url(../fontes/Inter-Bold.ttf); font-weight: 700; }
+
+:root { --amarelo: #FACC15; --preto: #0c0c10; --tinta: #ffffff; --mut: rgba(255,255,255,.6); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--preto); }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+#world { position: absolute; inset: 0; width: 1080px; height: 1920px; display: block; z-index: 1; }
+
+#topo { position: absolute; left: 0; right: 0; top: 150px; z-index: 5; text-align: center; color: var(--tinta); }
+#titulo { font-family: Sora; font-weight: 800; font-size: 54px; letter-spacing: -.01em; }
+.placar { display: flex; align-items: flex-end; justify-content: center; gap: 20px; margin-top: 6px; }
+#contador { font-family: Montserrat; font-weight: 900; font-size: 250px; line-height: .9; font-variant-numeric: tabular-nums; min-width: 4.2ch; }
+.tag { font-family: "JetBrains Mono"; font-weight: 700; font-size: 34px; background: var(--amarelo); color: var(--preto); padding: 6px 14px; border-radius: 8px; margin-bottom: 26px; }
+.chips { display: flex; justify-content: center; gap: 14px; margin-top: 22px; }
+.chip { font-family: "JetBrains Mono"; font-weight: 700; font-size: 32px; padding: 8px 22px; border-radius: 999px; border: 2px solid rgba(255,255,255,.35); color: var(--tinta); background: rgba(12,12,16,.78); }
+.chip.agora { background: var(--tinta); color: var(--preto); border-color: var(--tinta); }
+.chip.feito { border-color: var(--amarelo); color: var(--amarelo); }
+.chip.feito::before { content: "✓ "; }
+.chip.depois { color: rgba(255,255,255,.72); border-color: rgba(255,255,255,.28); }
+
+.rot-pote { position: absolute; z-index: 5; transform: translate(-50%, -100%); font-family: Montserrat; font-weight: 900; font-size: 64px; color: var(--tinta); opacity: 0; text-shadow: 0 4px 18px rgba(0,0,0,.6); }
+
+#chamada { position: absolute; left: 60px; right: 60px; bottom: 260px; z-index: 6; text-align: center; color: var(--tinta); opacity: 0; }
+#chamada h2 { font-family: Sora; font-weight: 800; font-size: 76px; line-height: 1.05; }
+#chamada p { font-family: Inter; font-weight: 700; font-size: 34px; color: var(--mut); margin-top: 18px; }
+#chamada b { color: var(--amarelo); }
